@@ -1,6 +1,6 @@
-# Java Console Application to find number machine required for processes that has start time & end time
+# Process Runner Machine Calculation
 
-This is a console application runs on Java. 
+Java Console Application to find number machine required for processes that has start time & end time
 
 
 ## Requirements 
