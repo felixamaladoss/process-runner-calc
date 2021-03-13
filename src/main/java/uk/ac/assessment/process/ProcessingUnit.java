@@ -1,4 +1,4 @@
-package uk.ac.process;
+package uk.ac.assessment.process;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -9,10 +9,13 @@ import java.util.Scanner;
 public class ProcessingUnit {
 
     // List holds running Processes
-    List<Process> machineList = new ArrayList<>();
+    private List<Process> machineList = new ArrayList<>();
 
     // List holds Processes to be run
-    List<Process> processList = new ArrayList<>();
+    private List<Process> processList = new ArrayList<>();
+
+    private static final String errorMessage = "Given input is invalid! Please enter list of array " +
+            "Integers like : [[2,3],[1,4],[3,5]]";
 
     /**
      * Allocate a Machine for every new process comming in
@@ -48,7 +51,7 @@ public class ProcessingUnit {
         }
     }
 
-    public Integer getRequiredMachines() {
+    public int getRequiredMachines() {
         Collections.sort(processList);
         for (int i = 0; i < processList.size(); i++) {
             allocateMachine(processList.get(i));
@@ -56,14 +59,18 @@ public class ProcessingUnit {
         return machineList.size();
     }
 
-
-    private void validateInput(String input) throws InvalidInputException {
+    /**
+     *  Validate Given input is in appropriate format
+     * @param input
+     * @throws InvalidInputException
+     */
+    public void validateInput(String input) throws InvalidInputException {
         if (!input.startsWith("[["))
-            throw new InvalidInputException();
+            throw new InvalidInputException(errorMessage);
         if (!input.endsWith("]]"))
-            throw new InvalidInputException();
+            throw new InvalidInputException(errorMessage);
         if (!input.contains(","))
-            throw new InvalidInputException();
+            throw new InvalidInputException(errorMessage);
     }
 
     private void addToProcessList(String proc) throws InvalidInputException {
@@ -72,9 +79,24 @@ public class ProcessingUnit {
             Integer endTime = Integer.parseInt(proc.split(",")[1]);
             processList.add(new Process(startTime, endTime));
         } catch (NumberFormatException ne) {
-            throw new InvalidInputException();
+            throw new InvalidInputException(errorMessage);
         }
 
+    }
+
+    public void calculateProcessingUnit(String input) throws InvalidInputException {
+        input = input.replaceAll("\\s+", "");
+        validateInput(input);
+        input = input.substring(2, input.length() - 2);
+        if (input.contains("],[")) {
+            String strArray[] = input.split("],\\[");
+            for (int i = 0; i < strArray.length; i++) {
+                String proc = strArray[i];
+                addToProcessList(proc);
+            }
+        } else {
+            addToProcessList(input);
+        }
     }
 
     public static void main(String[] args) throws InvalidInputException {
@@ -88,22 +110,8 @@ public class ProcessingUnit {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         scanner.close();
-        // String input = "[[7 ,9]]";
-        //String input = "[[7 ,9] ,  [2, 4], [ 9, 10]] ";
-        //String input = "[[0,3 ],[ 15, 18],[17, 20], [2,10]]";
-        input = input.replaceAll("\\s+", "");
         ProcessingUnit processUnit = new ProcessingUnit();
-        processUnit.validateInput(input);
-        input = input.substring(2, input.length() - 2);
-        if (input.contains("],[")) {
-            String strArray[] = input.split("],\\[");
-            for (int i = 0; i < strArray.length; i++) {
-                String proc = strArray[i];
-                processUnit.addToProcessList(proc);
-            }
-        } else {
-            processUnit.addToProcessList(input);
-        }
+        processUnit.calculateProcessingUnit(input);
         Integer processingUnit = processUnit.getRequiredMachines();
         System.out.println("Number of Machines required for processing : " + processingUnit);
 

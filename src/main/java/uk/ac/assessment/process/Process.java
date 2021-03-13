@@ -1,4 +1,4 @@
-package uk.ac.process;
+package uk.ac.assessment.process;
 
 public class Process implements Comparable<Process> {
 
