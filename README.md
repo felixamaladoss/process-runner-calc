@@ -20,18 +20,19 @@ mvn clean package
 
 After successful build, jar(process-runner-calc-1.0-SNAPSHOT.jar) will be created under target directory.
 
-#Execute
+## Execute
 
 ```
 java -jar target\process-runner-calc-1.0-SNAPSHOT.jar
 ```
 
-Enter the input in the console & press ENTER. Input must list of processes in array list.
+Enter the input in the console & press ENTER. Input must be list contains processes 
+which is an array with 2 integer - start time & end time.
 
 For example :
 [[1,5] ,[2,4], [4,5]]
 
-#Test
+## Test
 
 Test cases can be found under 'src\test\java' folder
 
