@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 
-
 public class ProcessingUnit {
 
     // List holds running Processes
@@ -51,7 +50,7 @@ public class ProcessingUnit {
         }
     }
 
-    public int getRequiredMachines() {
+    private int getRequiredMachines() {
         Collections.sort(processList);
         for (int i = 0; i < processList.size(); i++) {
             allocateMachine(processList.get(i));
@@ -84,7 +83,7 @@ public class ProcessingUnit {
 
     }
 
-    public void calculateProcessingUnit(String input) throws InvalidInputException {
+    public int calculateProcessingUnit(String input) throws InvalidInputException {
         input = input.replaceAll("\\s+", "");
         validateInput(input);
         input = input.substring(2, input.length() - 2);
@@ -97,6 +96,7 @@ public class ProcessingUnit {
         } else {
             addToProcessList(input);
         }
+        return getRequiredMachines();
     }
 
     public static void main(String[] args) throws InvalidInputException {
@@ -111,8 +111,7 @@ public class ProcessingUnit {
         String input = scanner.nextLine();
         scanner.close();
         ProcessingUnit processUnit = new ProcessingUnit();
-        processUnit.calculateProcessingUnit(input);
-        Integer processingUnit = processUnit.getRequiredMachines();
+        Integer processingUnit = processUnit.calculateProcessingUnit(input);
         System.out.println("Number of Machines required for processing : " + processingUnit);
 
     }

@@ -47,43 +47,36 @@ public class ProcessingUnitTest
 
     @Test
     public void testInput1Process() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT_1_PROCESS);
-        assertEquals(1, processingUnit.getRequiredMachines());
+        assertEquals(1, processingUnit.calculateProcessingUnit(INPUT_1_PROCESS));
     }
 
     @Test
     public void testInputWSpaces() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT_W_SPACES);
-        assertEquals(2, processingUnit.getRequiredMachines());
+        assertEquals(2, processingUnit.calculateProcessingUnit(INPUT_W_SPACES));
     }
 
     @Test
     public void testInput3() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT3);
-        assertEquals(2, processingUnit.getRequiredMachines());
+        assertEquals(2, processingUnit.calculateProcessingUnit(INPUT3));
     }
 
     @Test
     public void testInput4() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT4);
-        assertEquals(1, processingUnit.getRequiredMachines());
+        assertEquals(1, processingUnit.calculateProcessingUnit(INPUT4));
     }
 
     @Test
     public void testInput5() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT5);
-        assertEquals(4, processingUnit.getRequiredMachines());
+        assertEquals(4, processingUnit.calculateProcessingUnit(INPUT5));
     }
 
     @Test
     public void testInput6() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT6);
-        assertEquals(3, processingUnit.getRequiredMachines());
+        assertEquals(3, processingUnit.calculateProcessingUnit(INPUT6));
     }
 
     @Test
     public void testInput7() throws InvalidInputException {
-        processingUnit.calculateProcessingUnit(INPUT7);
-        assertEquals(2, processingUnit.getRequiredMachines());
+        assertEquals(2, processingUnit.calculateProcessingUnit(INPUT7));
     }
 }
